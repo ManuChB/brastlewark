@@ -14,4 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Launches the test runner in the interactive watch mode.<br />
 
+# Screenshots
 
+<img src="/screenshots/main.PNG" width="500">
+<img src="/screenshots/detail.PNG" width="500">
