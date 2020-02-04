@@ -1,0 +1,68 @@
+.gnomeList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.modal {
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+}
+.ReactModal__Content {
+    width: 55%
+}
+
+.searchBar {
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #97b0bd;
+    justify-content: center;
+        padding: 10px 10px;
+        height: 52px;
+}
+
+input {
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    line-height: 22px;
+    padding: 5px 10px 5px 35px;
+    height: 32px;
+    position: relative;
+}
+input:focus::placeholder {
+    color: transparent;
+}
+.searchIcon {
+    align-self: center;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    z-index: 5;
+    top: 20px;
+    left: 15px;
+}
+.scroll {
+    background-color: #c3c5c7;
+}
+@media only screen and (max-width: 800px) {
+
+   .ReactModal__Content {
+       width: 100%
+   }
+}
+
+@media only screen and (min-width: 801px) and (max-width: 1100px) {
+
+    .ReactModal__Content {
+        width: 80%
+    }
+}

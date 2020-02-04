@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GnomeList reducer handle closeModal() 1`] = `
+Object {
+  "data": Array [],
+  "filteredData": Array [],
+  "gnomeDetails": undefined,
+  "gnomeDetailsFriends": Array [],
+  "showModal": false,
+  "text": "",
+}
+`;
+
+exports[`GnomeList reducer handle saveData() 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "age": 100,
+      "friends": Array [],
+      "hair_color": "red",
+      "height": 100,
+      "id": 1,
+      "name": "name",
+      "onPress": [MockFunction],
+      "professions": Array [],
+      "thumbnail": "image",
+      "weight": 100,
+    },
+  ],
+  "filteredData": Array [],
+  "gnomeDetails": undefined,
+  "gnomeDetailsFriends": Array [],
+  "showModal": false,
+  "text": "",
+}
+`;
+
+exports[`GnomeList reducer handle setFilteredData() 1`] = `
+Object {
+  "data": Array [],
+  "filteredData": Array [
+    Object {
+      "age": 100,
+      "friends": Array [],
+      "hair_color": "red",
+      "height": 100,
+      "id": 1,
+      "name": "name",
+      "onPress": [MockFunction],
+      "professions": Array [],
+      "thumbnail": "image",
+      "weight": 100,
+    },
+  ],
+  "gnomeDetails": undefined,
+  "gnomeDetailsFriends": Array [],
+  "showModal": false,
+  "text": "",
+}
+`;
+
+exports[`GnomeList reducer handle showGnomeDetails() 1`] = `
+Object {
+  "data": Array [],
+  "filteredData": Array [],
+  "gnomeDetails": Object {
+    "age": 100,
+    "friends": Array [],
+    "hair_color": "red",
+    "height": 100,
+    "id": 1,
+    "name": "name",
+    "onPress": [MockFunction],
+    "professions": Array [],
+    "thumbnail": "image",
+    "weight": 100,
+  },
+  "gnomeDetailsFriends": Array [
+    Object {
+      "age": 100,
+      "friends": Array [],
+      "hair_color": "red",
+      "height": 100,
+      "id": 1,
+      "name": "name",
+      "onPress": [MockFunction],
+      "professions": Array [],
+      "thumbnail": "image",
+      "weight": 100,
+    },
+  ],
+  "showModal": true,
+  "text": "",
+}
+`;

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Actions closeModal() should return action 1`] = `
+Object {
+  "type": "@@main/CLOSE_MODAL",
+}
+`;
+
+exports[`Actions saveData() should return action 1`] = `
+Object {
+  "payload": Array [
+    Object {
+      "age": 100,
+      "friends": Array [],
+      "hair_color": "red",
+      "height": 100,
+      "id": 1,
+      "name": "name",
+      "onPress": [MockFunction],
+      "professions": Array [],
+      "thumbnail": "image",
+      "weight": 100,
+    },
+  ],
+  "type": "@@main/SAVE_DATA",
+}
+`;
+
+exports[`Actions setFilteredData() should return action 1`] = `
+Object {
+  "payload": Array [
+    Object {
+      "age": 100,
+      "friends": Array [],
+      "hair_color": "red",
+      "height": 100,
+      "id": 1,
+      "name": "name",
+      "onPress": [MockFunction],
+      "professions": Array [],
+      "thumbnail": "image",
+      "weight": 100,
+    },
+  ],
+  "type": "@@main/SET_FILTERED_DATA",
+}
+`;
+
+exports[`Actions showGnomeDetails() should return action 1`] = `
+Object {
+  "payload": Object {
+    "friends": Array [
+      Object {
+        "age": 100,
+        "friends": Array [],
+        "hair_color": "red",
+        "height": 100,
+        "id": 1,
+        "name": "name",
+        "onPress": [MockFunction],
+        "professions": Array [],
+        "thumbnail": "image",
+        "weight": 100,
+      },
+    ],
+    "gnome": Object {
+      "age": 100,
+      "friends": Array [],
+      "hair_color": "red",
+      "height": 100,
+      "id": 1,
+      "name": "name",
+      "onPress": [MockFunction],
+      "professions": Array [],
+      "thumbnail": "image",
+      "weight": 100,
+    },
+  },
+  "type": "@@main/SHOW_DETAILS",
+}
+`;
