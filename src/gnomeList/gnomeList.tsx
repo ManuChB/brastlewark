@@ -16,11 +16,13 @@ export interface IGnomeListProps {
 }
 
 export interface IGnomeListState {
-    data: Array<IGnomeProp>,
+    dataToShow: Array<IGnomeProp>,
+    rawData: Array<IGnomeProp>,
     showModal: boolean,
     gnomeDetails?: IGnomeProp,
     gnomeDetailsFriends: Array<IGnomeProp>,
-    filteredData: Array<IGnomeProp>
+    filteredData: Array<IGnomeProp>,
+    activePage: number
 }
 
 export interface IGnomeListActions {
@@ -28,8 +30,13 @@ export interface IGnomeListActions {
     showGnomeDetails: (gnome: IGnomeProp, friends: Array<IGnomeProp>) => Action;
     closeModal: () => Action;
     setFilteredData: (filteredData: Array<IGnomeProp>) => Action;
+    setDataToShow: (dataToshow: Array<IGnomeProp>) => Action;
+    setActivePage: (page: number) => Action;
     
 }
+
+const GNOMES_IN_PAGE = 20;
+
 class GnomeList extends Component<IGnomeListProps> {
 
     componentDidMount() {
@@ -38,13 +45,10 @@ class GnomeList extends Component<IGnomeListProps> {
     }
 
     getGnomes() {
-        const { data, filteredData } = this.props.state;
+        const { dataToShow } = this.props.state;
 
-        if (!_.isEmpty(filteredData)) {
-            return filteredData.map((gnome, key) =>
-                <Gnome key={key} {...gnome} onPress={() => this.showGnomeDetails(gnome)}></Gnome>)
-        } else if (!_.isEmpty(data)) {
-            return data.map((gnome, key) =>
+        if (!_.isEmpty(dataToShow)) {
+            return dataToShow.map((gnome, key) =>
                 <Gnome key={key} {...gnome} onPress={() => this.showGnomeDetails(gnome)}></Gnome>)
         }
         else {
@@ -59,7 +63,7 @@ class GnomeList extends Component<IGnomeListProps> {
 
 
     getGnomeDataByName(name: string): IGnomeProp {
-        const gnome = this.props.state.data.filter((gnome) => gnome.name === name)
+        const gnome = this.props.state.rawData.filter((gnome) => gnome.name === name)
         return  gnome[0] as IGnomeProp
     }
 
@@ -68,14 +72,55 @@ class GnomeList extends Component<IGnomeListProps> {
     }
 
     searchByName = _.debounce((text: string) => {
-        const { data } = this.props.state;
-        const filteredData = data.filter( gnome => gnome.name.toLowerCase().includes(text.toLowerCase()))
+        const { rawData } = this.props.state;
+        const filteredData = rawData.filter( gnome => gnome.name.toLowerCase().includes(text.toLowerCase()))
         this.props.actions.setFilteredData(filteredData);
+        this.filterByPagination(1);
     }, 700)
 
-    render() {
-        const { showModal, gnomeDetails, gnomeDetailsFriends } = this.props.state;
+    setPagination() {
+        const { activePage, filteredData, rawData } = this.props.state;
+        const pages = !_.isEmpty(filteredData) ? 
+            Math.ceil(filteredData.length / GNOMES_IN_PAGE) : 
+            Math.ceil(rawData.length / GNOMES_IN_PAGE);
+        const pageNumbers = [];
+        if (pages !== null) {
+            for (let i = 1; i <= pages; i++) {
+                pageNumbers.push(i);
+            }
+            return pageNumbers.map(number => {
+                let classes = activePage === number ? "active" : '';
+                if (number >= activePage - 2 && number <= activePage + 2) {
+                    return (
+                        <span key={number} className={classes} 
+                            onClick={() => this.filterByPagination(number)}>{number}
+                        </span>
+                    );
+                }
+            });
+        }
+    }
 
+    filterByPagination(page: number) {
+        const { rawData, filteredData } = this.props.state;
+
+        this.props.actions.setActivePage(page);
+        if (!_.isEmpty(filteredData)) {
+            this.props.actions.setDataToShow(filteredData.slice((page - 1) * GNOMES_IN_PAGE, page * GNOMES_IN_PAGE))
+        }
+        else if (!_.isEmpty(rawData)) {
+            this.props.actions.setDataToShow(rawData.slice((page - 1) * GNOMES_IN_PAGE, page * GNOMES_IN_PAGE))
+        }
+        else {
+            return null
+        } 
+    }
+
+    render() {
+        const { showModal, gnomeDetails, gnomeDetailsFriends, filteredData, rawData } = this.props.state;
+        const pages = !_.isEmpty(filteredData) ?
+            Math.ceil(filteredData.length / GNOMES_IN_PAGE) :
+            Math.ceil(rawData.length / GNOMES_IN_PAGE);
         return (
             <div className="scroll">
                 <div className='searchBar'>
@@ -88,6 +133,12 @@ class GnomeList extends Component<IGnomeListProps> {
                     </input>
                 </div>
                 <h1>Brastlewark</h1>
+                <div className={"pagination"}>
+                    <span onClick={() => this.filterByPagination(1)}>&laquo;</span>
+                    {this.setPagination()}
+                    <span onClick={() => this.filterByPagination(pages)}>&raquo;</span>
+                </div>
+                
                 <div className="gnomeList">
                     {this.getGnomes()}
                     {gnomeDetails && <Modal

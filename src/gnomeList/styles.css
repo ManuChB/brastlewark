@@ -53,6 +53,26 @@ input:focus::placeholder {
 .scroll {
     background-color: #c3c5c7;
 }
+
+.pagination {
+    margin: 50px;
+}
+
+.pagination span {
+    cursor: pointer;
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+.pagination span.active {
+    background-color: #0099FF;
+    color: white;
+    border: 1px solid #0099FF;
+}
+
 @media only screen and (max-width: 800px) {
 
    .ReactModal__Content {

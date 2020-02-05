@@ -1,4 +1,6 @@
-import { SAVE_DATA, SHOW_DETAILS, CLOSE_MODAL, SET_FILTERED_DATA} from './types';
+import { SAVE_DATA, SHOW_DETAILS, CLOSE_MODAL, 
+    SET_FILTERED_DATA, SET_ACTIVE_PAGE, 
+    SET_DATA_TO_SHOW} from './types';
 import axios from 'axios';
 import { Dispatch, Action } from 'redux';
 import { IGnomeProp } from '../gnome/gnome';
@@ -28,6 +30,18 @@ const actions: IGnomeListActions = {
         return {
             type: SET_FILTERED_DATA,
             payload: gnomes
+        }
+    },
+    setDataToShow(gnomes: Array<IGnomeProp>) {
+        return {
+            type: SET_DATA_TO_SHOW,
+            payload: gnomes
+        }
+    },
+    setActivePage(page: number) {
+        return {
+            type: SET_ACTIVE_PAGE,
+            payload: page
         }
     }
 }
